@@ -4,6 +4,7 @@ using P3AddNewFunctionalityDotNetCore.Models.Services;
 using P3AddNewFunctionalityDotNetCore.Models.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Localization;
 
 namespace P3AddNewFunctionalityDotNetCore.Controllers
 {
@@ -11,11 +12,14 @@ namespace P3AddNewFunctionalityDotNetCore.Controllers
     {
         private readonly IProductService _productService;
         private readonly ILanguageService _languageService;
+        private readonly IStringLocalizer<ProductController> _localizer;
+        
 
-        public ProductController(IProductService productService, ILanguageService languageService)
+        public ProductController(IProductService productService, ILanguageService languageService, IStringLocalizer<ProductController> localizer)   
         {
             _productService = productService;
             _languageService = languageService;
+            _localizer = localizer;
         }
 
         public IActionResult Index()
@@ -44,7 +48,9 @@ namespace P3AddNewFunctionalityDotNetCore.Controllers
 
             foreach (string error in modelErrors)
             {
-                ModelState.AddModelError("", error);
+                string localizedError = _localizer[error];
+
+                ModelState.AddModelError(error, localizedError);
             }
 
             if (ModelState.IsValid)
