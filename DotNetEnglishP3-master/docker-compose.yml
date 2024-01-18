@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    platform: linux/amd64
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "azerty1234!"
+    ports:
+      - 1433:1433
+  web:
+    build: .
+    depends_on:
+      - db
+    environment:
+      ACCEPT_EULA: "Y"
+      ConnectionStrings__P3Referential: "Server=db,1433;Database=P3Referential-2f561d3b-493f-46fd-83c9-6e2643e7bd0a;User=sa;Password=azerty1234!;Trusted_Connection=False;MultipleActiveResultSets=true"
+      ConnectionStrings__P3Identity: "Server=db,1433;Database=Identity;User=sa;Password=azerty1234!;Trusted_Connection=False;MultipleActiveResultSets=true"
+    ports:
+      - 8000:80
+      - 8080:8080
