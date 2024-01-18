@@ -1,13 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using P3AddNewFunctionalityDotNetCore.Models.Services;
+using P3AddNewFunctionalityDotNetCore.Models.ViewModels;
 
 namespace P3AddNewFunctionalityDotNetCore.Components
 {
     public class LanguageSelectorViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke(ILanguageService languageService)
+        private readonly ILanguageService _languageService;
+
+        public LanguageSelectorViewComponent(ILanguageService languageService)
         {
-            return View(languageService);
+            _languageService = languageService;
+        }
+
+        public IViewComponentResult Invoke()
+        {
+            var model = new LanguageViewModel
+            {
+                Language = _languageService.SetCulture(HttpContext.Request.Query["language"])
+            };
+
+            return View(model);
         }
     }
 }
