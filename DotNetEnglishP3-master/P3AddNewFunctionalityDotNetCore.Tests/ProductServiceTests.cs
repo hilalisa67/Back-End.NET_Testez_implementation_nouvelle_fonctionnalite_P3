@@ -61,7 +61,7 @@ namespace P3AddNewFunctionalityDotNetCore.Tests
             var errors = _service.CheckProductModelErrors(product);
 
             // Assert
-            Assert.Contains(errors, error => error.ErrorMessage == "La valeur saisie pour le prix doit être un nombre");
+            Assert.Contains(errors, error => error.ErrorMessage == "La valeur saisie pour le prix doit être un nombre positif");
         }
 
         [Fact]

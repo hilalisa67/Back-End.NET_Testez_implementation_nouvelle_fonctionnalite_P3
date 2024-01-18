@@ -127,7 +127,7 @@
     <value>Veuillez saisir un stock</value>
   </data>
   <data name="PriceNotANumber" xml:space="preserve">
-    <value>La valeur saisie pour le prix doit être un nombre</value>
+    <value>La valeur saisie pour le prix doit être un nombre positif</value>
   </data>
   <data name="PriceNotGreaterThanZero" xml:space="preserve">
     <value>Le prix doit être supérieur à zéro</value>

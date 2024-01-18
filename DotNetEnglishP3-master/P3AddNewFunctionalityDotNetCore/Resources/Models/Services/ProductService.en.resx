@@ -127,7 +127,7 @@
     <value>Please enter a stock value</value>
   </data>
   <data name="PriceNotANumber" xml:space="preserve">
-    <value>The value entered for the price must be a number</value>
+    <value>The value entered for the price must be a positive number</value>
   </data>
   <data name="PriceNotGreaterThanZero" xml:space="preserve">
     <value>The price must be greater than zero</value>
