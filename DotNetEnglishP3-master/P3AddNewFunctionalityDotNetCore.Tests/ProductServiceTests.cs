@@ -34,7 +34,7 @@ namespace P3AddNewFunctionalityDotNetCore.Tests
             var errors = _service.CheckProductModelErrors(product);
 
             // Assert
-            Assert.Contains("MissingName", errors);
+            Assert.Contains(errors, error => error.ErrorMessage == "Veuillez saisir un nom");
         }
 
         [Fact]
@@ -47,9 +47,10 @@ namespace P3AddNewFunctionalityDotNetCore.Tests
             var errors = _service.CheckProductModelErrors(product);
 
             // Assert
-            Assert.Contains("MissingPrice", errors);
+            Assert.Contains(errors, error => error.ErrorMessage == "Veuillez saisir un prix");
         }
-        
+
+
         [Fact]
         public void CreateProduct_ReturnsPriceNotANumber_WhenPriceIsNotANumber()
         {
@@ -60,7 +61,7 @@ namespace P3AddNewFunctionalityDotNetCore.Tests
             var errors = _service.CheckProductModelErrors(product);
 
             // Assert
-            Assert.Contains("PriceNotANumber", errors);
+            Assert.Contains(errors, error => error.ErrorMessage == "La valeur saisie pour le prix doit être un nombre");
         }
 
         [Fact]
@@ -73,7 +74,7 @@ namespace P3AddNewFunctionalityDotNetCore.Tests
             var errors = _service.CheckProductModelErrors(product);
 
             // Assert
-            Assert.Contains("PriceNotGreaterThanZero", errors);
+            Assert.Contains(errors, error => error.ErrorMessage == "Le prix doit être supérieur à zéro");
         }
 
         [Fact]
@@ -86,7 +87,7 @@ namespace P3AddNewFunctionalityDotNetCore.Tests
             var errors = _service.CheckProductModelErrors(product);
 
             // Assert
-            Assert.Contains("MissingQuantity", errors);
+            Assert.Contains(errors, error => error.ErrorMessage == "Veuillez saisir un stock");
         }
 
         [Fact]
@@ -99,7 +100,7 @@ namespace P3AddNewFunctionalityDotNetCore.Tests
             var errors = _service.CheckProductModelErrors(product);
 
             // Assert
-            Assert.Contains("QuantityNotAnInteger", errors);
+            Assert.Contains(errors, error => error.ErrorMessage == "Seuls les nombres entiers sont autorisés pour le stock");
         }
 
         [Fact]
@@ -112,7 +113,7 @@ namespace P3AddNewFunctionalityDotNetCore.Tests
             var errors = _service.CheckProductModelErrors(product);
 
             // Assert
-            Assert.Contains("QuantityNotGreaterThanZero", errors);
+            Assert.Contains(errors, error => error.ErrorMessage == "La quantité doit être supérieure à zéro");
         }
     }
 }

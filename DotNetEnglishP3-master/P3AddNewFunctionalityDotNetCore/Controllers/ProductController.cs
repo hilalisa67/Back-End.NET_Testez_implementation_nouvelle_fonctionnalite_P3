@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using P3AddNewFunctionalityDotNetCore.Models.Services;
 using P3AddNewFunctionalityDotNetCore.Models.ViewModels;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Microsoft.Extensions.Localization;
 
@@ -44,12 +45,12 @@ namespace P3AddNewFunctionalityDotNetCore.Controllers
         [HttpPost]
         public IActionResult Create(ProductViewModel product)
         {
-            List<string> modelErrors = _productService.CheckProductModelErrors(product);           
+            List<ValidationResult> validationResults = _productService.CheckProductModelErrors(product);
 
-            foreach (string error in modelErrors)
+            foreach (ValidationResult validationResult in validationResults)
             {
+                string error = validationResult.ErrorMessage;
                 string localizedError = _localizer[error];
-
                 ModelState.AddModelError(error, localizedError);
             }
 

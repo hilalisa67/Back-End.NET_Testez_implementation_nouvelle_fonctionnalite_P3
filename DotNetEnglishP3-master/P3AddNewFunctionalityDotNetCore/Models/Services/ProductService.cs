@@ -90,15 +90,15 @@ namespace P3AddNewFunctionalityDotNetCore.Models.Services
                 _productRepository.UpdateProductStocks(line.Product.Id, line.Quantity);
             }
         }
+        
+       public List<ValidationResult> CheckProductModelErrors(ProductViewModel product)
+       {
+           var validationResults = new List<ValidationResult>();
+           var context = new ValidationContext(product, null, null);
+           Validator.TryValidateObject(product, context, validationResults, true);
 
-        public List<string> CheckProductModelErrors(ProductViewModel product)
-        {
-          var validationResults = new List<ValidationResult>();
-          var context = new ValidationContext(product, null, null);
-          Validator.TryValidateObject(product, context, validationResults, true);
-
-          return validationResults.Select(error => error.ErrorMessage).ToList();
-        }
+           return validationResults;
+       }
 
         public void SaveProduct(ProductViewModel product)
         {

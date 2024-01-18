@@ -26,6 +26,7 @@ namespace P3AddNewFunctionalityDotNetCore.Models.ViewModels
 
         [LocalizedRequired<ProductService>("MissingPrice")]
         [Range(0.01, double.MaxValue, ErrorMessageResourceName = "PriceNotGreaterThanZero", ErrorMessageResourceType = typeof(Ressource.ProductService))]
+        [RegularExpression(@"^\d+$", ErrorMessageResourceName = "PriceNotANumber", ErrorMessageResourceType = typeof(Ressource.ProductService))]
         public string Price { get; init; }
     }
 }
