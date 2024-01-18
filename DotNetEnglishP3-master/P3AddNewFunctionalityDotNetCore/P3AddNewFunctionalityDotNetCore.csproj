@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -21,6 +22,60 @@
     <None Remove="Infrastructure\**" />
     <None Remove="Models\ViewModel\**" />
     <None Remove="Repository\**" />
+    <EmbeddedResource Update="Resources\Models\Product.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Models\Product.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Models\Product.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Models\Services\ProductService.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>Ressources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Models\Services\ProductService.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>Ressources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Models\Services\ProductService.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProductService.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Ressource</CustomToolNamespace>
+    </EmbeddedResource>
+    <Compile Update="Resources\Models\Services\ProductService.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ProductService.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Update="Resources\Models\ViewModels\LanguageViewModel.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LanguageViewModel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Update="Resources\Models\ViewModels\LanguageViewModel.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LanguageViewModel.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Update="Resources\Models\Order.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Order.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Ressource</CustomToolNamespace>
+    </EmbeddedResource>
+    <Compile Update="Resources\Models\Order.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Order.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Update="Resources\Models\Order.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>Ressource</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Models\Order.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>ressource</CustomToolNamespace>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -29,15 +84,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Remove="Resources\Models\Order.en.resx" />
-  </ItemGroup>
-
-  <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Resources\Models\Order.en.resx" />
   </ItemGroup>
 
   <ItemGroup>
