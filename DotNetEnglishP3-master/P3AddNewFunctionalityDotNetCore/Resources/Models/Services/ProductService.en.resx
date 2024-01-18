@@ -133,9 +133,15 @@
     <value>The price must be greater than zero</value>
   </data>
   <data name="StockNotAnInteger" xml:space="preserve">
-    <value>The value entered for the stock must be a integer</value>
+    <value>Only whole numbers are allowed for the stock.</value>
   </data>
   <data name="StockNotGreaterThanZero" xml:space="preserve">
-    <value>The stock must greater than zero</value>
+    <value>The quantity must greater than zero</value>
+  </data>
+  <data name="MissingDescription" xml:space="preserve">
+    <value>Description is missing</value>
+  </data>
+  <data name="MissingDetails" xml:space="preserve">
+    <value>The field is required to create a product</value>
   </data>
 </root>

@@ -133,9 +133,15 @@
     <value>La prix doit être supérieur à zéro</value>
   </data>
   <data name="StockNotAnInteger" xml:space="preserve">
-    <value>La valeur saisie pour le stock doit être un entier</value>
+    <value>Seuls les nombres entiers sont autorisés pour le stock.</value>
   </data>
   <data name="StockNotGreaterThanZero" xml:space="preserve">
-    <value>La stock doit être supérieure à zéro</value>
+    <value>La quantité doit être supérieure à zéro</value>
+  </data>
+  <data name="MissingDescription" xml:space="preserve">
+    <value>La description est obligatoire</value>
+  </data>
+  <data name="MissingDetails" xml:space="preserve">
+    <value>Le champ est requis pour la création d'un produit</value>
   </data>
 </root>
