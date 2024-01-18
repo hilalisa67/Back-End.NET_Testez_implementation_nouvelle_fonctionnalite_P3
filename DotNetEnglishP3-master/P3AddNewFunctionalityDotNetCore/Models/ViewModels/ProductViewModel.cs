@@ -1,20 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using System.ComponentModel;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.ComponentModel.DataAnnotations;
+using Ressource;
 
 namespace P3AddNewFunctionalityDotNetCore.Models.ViewModels
 {
     public class ProductViewModel
     {
         [BindNever]
-        public int Id { get; set; }
+        public int Id { get; init; }
 
-        public string Name { get; set; }
+        [LocalizedRequired<ProductService>("MissingName")]
+        public string Name { get; init; }
 
-        public string Description { get; set; }
+        [LocalizedRequired<ProductService>("MissingDescription")]
+        public string Description { get; init; }
 
-        public string Details { get; set; }
+        [LocalizedRequired<ProductService>("MissingDetails")]
+        public string Details { get; init; }
 
-        public string Stock { get; set; }
+        [LocalizedRequired<ProductService>("MissingStock")]
+        [Range(1, int.MaxValue, ErrorMessageResourceName = "StockNotGreaterThanZero", ErrorMessageResourceType = typeof(Ressource.ProductService))]
+        [RegularExpression(@"^\d+$", ErrorMessageResourceName = "StockNotAnInteger", ErrorMessageResourceType = typeof(Ressource.ProductService))]
+        public string Stock { get; init; }
 
-        public string Price { get; set; }
+        [LocalizedRequired<ProductService>("MissingPrice")]
+        [Range(0.01, double.MaxValue, ErrorMessageResourceName = "PriceNotGreaterThanZero", ErrorMessageResourceType = typeof(Ressource.ProductService))]
+        public string Price { get; init; }
     }
 }
