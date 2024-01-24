@@ -21,6 +21,10 @@ public class AdminController
         _context = context;
     }
 
+    public List<Product> GetProducts()
+    {
+        return _context.Product.ToList();
+    }
     public void AddProduct(Product product)
     {
         _context.Product.Add(product);
@@ -42,55 +46,10 @@ public class AdminController
     }
 }
 
-public class ClientController
-{
-    private readonly P3Referential _context;
-    private readonly Cart _cart;
-
-    public ClientController(P3Referential context, Cart cart)
-    {
-        _context = context;
-        _cart = cart;
-    }
-
-    public List<Product> GetProducts()
-    {
-        return _context.Product.ToList();
-    }
-
-    public void AddToCart(int productId, int quantity)
-    {
-        var product = _context.Product.FirstOrDefault(p => p.Id == productId);
-        if (product != null)
-        {
-            _cart.AddItem(product, quantity);
-        }
-    }
-
-    public Cart GetCart()
-    {
-        return _cart;
-    }
-
-    public void ValidateCart()
-    {
-        var order = new Order
-            {Name = "John Do", Address = "7 rue des lilas", City = "Strasbourg", Country = "France", Zip = "67000"};
-        foreach (var line in _cart.Lines)
-        {
-            order.OrderLine.Add(new OrderLine {Product = line.Product, Quantity = line.Quantity});
-        }
-
-        _context.Order.Add(order);
-        _context.SaveChanges();
-    }
-}
-
 public class ProductServiceIntegrationTests: IDisposable
 {
     private readonly P3Referential _context;
     private readonly AdminController _adminController;
-    private readonly ClientController _clientController;
 
     public ProductServiceIntegrationTests()
     {
@@ -104,7 +63,6 @@ public class ProductServiceIntegrationTests: IDisposable
 
         _context = new P3Referential(options, configuration);
         _adminController = new AdminController(_context);
-        _clientController = new ClientController(_context, new Cart());
     }
 
     public void Dispose()
@@ -132,7 +90,7 @@ public class ProductServiceIntegrationTests: IDisposable
 
         // Act
         _adminController.AddProduct(product);
-        var clientProducts = _clientController.GetProducts();
+        var clientProducts = _adminController.GetProducts();
 
         // Assert
         Assert.Contains(clientProducts, p => p.Name == product.Name && p.Price == product.Price);
@@ -142,14 +100,14 @@ public class ProductServiceIntegrationTests: IDisposable
         product.Price = 20.0;
         product.Details = "Update data";
         _adminController.UpdateProduct(product);
-        clientProducts = _clientController.GetProducts();
+        clientProducts = _adminController.GetProducts();
 
         // Assert
         Assert.Contains(clientProducts, p => p.Name == product.Name && p.Price == product.Price);
 
         // Act
         _adminController.DeleteProduct(product.Id);
-        clientProducts = _clientController.GetProducts();
+        clientProducts = _adminController.GetProducts();
 
         // Assert
         Assert.DoesNotContain(clientProducts, p => p.Id == product.Id);
