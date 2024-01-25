@@ -36,3 +36,42 @@ Si vous avez installé MSSQL Express, la valeur à utiliser pour Server est trè
   
 Si vous avez des difficultés à vous connecter, essayez d’abord de vous connecter à l’aide de Microsoft SQL Server Management Studio (assurez-vous que le type d’authentification est « Authentification Windows »), ou consultez le site https://sqlserver-help.com/2011/06/19/help-whats-my-sql-server-name/.
 Si le problème persiste, demandez de l’aide à votre mentor.
+
+
+## Configuration du Docker Compose
+
+Ouvrez le fichier `docker-compose.yml` et assurez-vous que les paramètres tels que `SA_PASSWORD`, `ACCEPT_EULA`, et les noms de bases de données sont configurés selon vos besoins.
+
+## Exécution avec Docker Compose
+
+Exécutez la commande suivante pour démarrer MSSQL Server :
+
+```bash
+docker-compose up -d
+```
+Cela lancera le conteneur MSSQL Server en arrière-plan.
+
+Vérification de l'Exécution
+Pour vérifier si le serveur est en cours d'exécution, utilisez la commande suivante :
+
+```bash
+docker ps -a
+```
+Vous devriez voir le conteneur MSSQL Server actif.
+
+Accès à la Base de Données
+Vous pouvez accéder à la base de données avec les informations suivantes :
+
+Serveur: localhost,1433
+Utilisateur: sa
+Mot de passe: azerty1234!
+Arrêt du Conteneur
+Lorsque vous avez terminé, vous pouvez arrêter le conteneur avec la commande suivante :
+
+```bash
+docker-compose down
+```
+Cela arrêtera et retirera le conteneur MSSQL Server.
+
+
+
